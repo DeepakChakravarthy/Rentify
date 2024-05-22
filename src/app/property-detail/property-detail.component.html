@@ -1,0 +1,11 @@
+<div *ngIf="property">
+    <h1>{{ property.title }}</h1>
+    <img [src]="property.imageUrl" alt="Property Image">
+    <p>{{ property.description }}</p>
+    <div>
+      <span>Likes: {{ property.likes }}</span>
+      <span>Views: {{ property.views }}</span>
+    </div>
+    <button (click)="onInterested()">I am Interested</button>
+  </div>
+  
