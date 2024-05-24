@@ -1,30 +1,47 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
 })
-export class AuthComponent implements OnInit, OnDestroy  {
+export class AuthComponent {
   emailOrPhone: string = '';
+  password: string = '';
   firstName: string = '';
   lastName: string = '';
+  mobileNumber: string = '';
   currentStep: number = 1;
+  confirmPassword: string = '';
+  showPassword: boolean = false;
 
-  constructor() { }
+  constructor(private renderer: Renderer2) {}
+
   ngOnInit() {
-    document.body.style.backgroundColor = '#f4f4f4'; // Set the background color when component loads
+    this.renderer.setStyle(document.body, 'background-color', '#f4f4f4');
   }
 
   ngOnDestroy() {
-    document.body.style.backgroundColor = ''; // Reset the background color when component is destroyed
+    this.renderer.removeStyle(document.body, 'background-color');
   }
 
-  goToNext(): void {
-    // Add login logic here
+  goToStep(step: number): void {
+    this.currentStep = step;
+  }
+
+  login(): void {
+    // Implement login logic
   }
 
   createAccount(): void {
-    // Add account creation logic here
+    if (this.password === this.confirmPassword) {
+      // Implement account creation logic
+    } else {
+      alert('Passwords do not match');
+    }
+  }
+
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
   }
 }

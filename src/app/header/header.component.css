@@ -18,3 +18,12 @@
 .nav-link-post:hover {
     color: white;
 }
+.product-name{
+    color: white;
+    cursor: pointer;
+    top: 15px;
+    position: absolute;
+    display: flex;
+    font-size: xx-large;
+    left: 30px;
+}

@@ -1,16 +1,160 @@
-<h1>Post a Rent</h1>
-<form (ngSubmit)="onSubmit()">
-  <div>
-    <label for="title">Title</label>
-    <input type="text" id="title" [(ngModel)]="property.title" name="title">
-  </div>
-  <div>
-    <label for="description">Description</label>
-    <textarea id="description" [(ngModel)]="property.description" name="description"></textarea>
-  </div>
-  <div>
-    <label for="imageUrl">Image URL</label>
-    <input type="text" id="imageUrl" [(ngModel)]="property.imageUrl" name="imageUrl">
-  </div>
-  <button type="submit">Post Property</button>
+<form [formGroup]="propertyForm" (ngSubmit)="onSubmit()">
+  <mat-horizontal-stepper [linear]="isLinear" class="custom-stepper">
+    <mat-step [stepControl]="basicInfo">
+      <ng-template matStepLabel>Basic Information</ng-template>
+      <div [formGroup]="basicInfo" class="form-group">
+        <p>Provide a catchy title for your post:</p>
+        <input matInput placeholder="Title" formControlName="title" class="custom-input">
+        <p>Give detailed information about the rental house:</p>
+        <textarea matInput placeholder="Description" formControlName="description" class="custom-input"></textarea>
+        <p>Total Square Feet of the House</p>
+        <input matInput placeholder="3000 SquareFeet" formControlName="place" class="custom-input">
+        <button mat-button matStepperNext [disabled]="!basicInfo.valid" class="custom-button">Next</button>
+      </div>
+    </mat-step>
+    <mat-step [stepControl]="financialDetails">
+      <ng-template matStepLabel>Financial Details</ng-template>
+      <div [formGroup]="financialDetails" class="form-group">
+        <p>Rent Amount:</p>
+        <input matInput placeholder="Rent Amount" formControlName="rentAmount" class="custom-input">
+        <p>Tenant Rental Period:</p>
+        <input matInput placeholder="Tenant Rental Period" formControlName="tenantRentalPeriod" class="custom-input">
+        <p>Advance Amount:</p>
+        <input matInput placeholder="Advance Amount" formControlName="advanceAmount" class="custom-input">
+        <button mat-button matStepperNext [disabled]="!financialDetails.valid" class="custom-button">Next</button>
+      </div>
+    </mat-step>
+    <mat-step [stepControl]="preferencesFeatures">
+      <ng-template matStepLabel>Preferences and Features</ng-template>
+      <div [formGroup]="preferencesFeatures" class="form-group preferences-grid">
+        <div class="grid-item">
+          <p>Tenant Preference:</p>
+          <mat-form-field appearance="fill" class="custom-form-field">
+            <mat-label>Tenant Preference</mat-label>
+            <mat-select formControlName="tenantPreference" class="custom-select">
+              <mat-option value="Family">Family</mat-option>
+              <mat-option value="Bachelors">Bachelors</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="grid-item">
+          <p>Age of the House:</p>
+          <input matInput placeholder="13 Years" formControlName="propertyStatus" class="custom-input">
+        </div>
+        <div class="grid-item">
+          <p>Date Available:</p>
+          <mat-form-field appearance="fill" class="custom-form-field">
+            <mat-label>Date Available</mat-label>
+            <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" formControlName="dateAvailable">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="grid-item">
+          <p>Rent Agreement Available:</p>
+          <mat-radio-group formControlName="rentAgreementAvailable" class="custom-radio-group">
+            <mat-radio-button value="Yes" class="custom-radio-button">Yes</mat-radio-button>
+            <mat-radio-button value="No" class="custom-radio-button">No</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="grid-item">
+          <p>Agreement Renewal Period:</p>
+          <input matInput placeholder="Agreement Renewal Period" formControlName="agreementRenewalPeriod" class="custom-input">
+        </div>
+        <div class="grid-item">
+          <p>CCTV Available:</p>
+          <mat-radio-group formControlName="cctvAvailable" class="custom-radio-group">
+            <mat-radio-button value="Yes" class="custom-radio-button">Yes</mat-radio-button>
+            <mat-radio-button value="No" class="custom-radio-button">No</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="grid-item">
+          <p>EB Bill Debited:</p>
+          <mat-radio-group formControlName="ebBillDebited" class="custom-radio-group">
+            <mat-radio-button value="Yes" class="custom-radio-button">Yes</mat-radio-button>
+            <mat-radio-button value="No" class="custom-radio-button">No</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="grid-item">
+          <p>Water Tax Included:</p>
+          <mat-radio-group formControlName="waterTaxIncluded" class="custom-radio-group">
+            <mat-radio-button value="Yes" class="custom-radio-button">Yes</mat-radio-button>
+            <mat-radio-button value="No" class="custom-radio-button">No</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="grid-item">
+          <p>Parking Area Available:</p>
+          <mat-radio-group formControlName="parkingAreaAvailable" class="custom-radio-group">
+            <mat-radio-button value="Yes" class="custom-radio-button">Yes</mat-radio-button>
+            <mat-radio-button value="No" class="custom-radio-button">No</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="grid-item">
+          <p>Pet Friendly:</p>
+          <mat-radio-group formControlName="petFriendly" class="custom-radio-group">
+            <mat-radio-button value="Yes" class="custom-radio-button">Yes</mat-radio-button>
+            <mat-radio-button value="No" class="custom-radio-button">No</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="grid-item">
+          <p>Balcony Available:</p>
+          <mat-radio-group formControlName="balconyAvailable" class="custom-radio-group">
+            <mat-radio-button value="Yes" class="custom-radio-button">Yes</mat-radio-button>
+            <mat-radio-button value="No" class="custom-radio-button">No</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+      <button mat-button matStepperNext [disabled]="!preferencesFeatures.valid" class="custom-button">Next</button>
+    </mat-step>
+    <mat-step [stepControl]="locationDetails">
+      <ng-template matStepLabel>Location and Other details</ng-template>
+      <div [formGroup]="locationDetails" class="form-group">
+        <!-- Address Details -->
+        <p>Address Details:</p>
+        <input matInput placeholder="Address" formControlName="address" class="custom-input">
+        <input matInput placeholder="Pincode" formControlName="pincode" class="custom-input">
+        <input matInput placeholder="Landmark" formControlName="landmark" class="custom-input">
+
+        <!-- Location Dropdowns -->
+        <p>Location:</p>
+        <mat-form-field appearance="fill" class="custom-form-field">
+          <mat-label>State</mat-label>
+          <mat-select formControlName="state" class="custom-select">
+            <mat-option value="Tamil Nadu">Tamil Nadu</mat-option>
+            <mat-option value="Kerala">Kerala</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="custom-form-field">
+          <mat-label>Country</mat-label>
+          <mat-select formControlName="country" class="custom-select">
+            <mat-option value="India">India</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="custom-form-field">
+          <mat-label>City</mat-label>
+          <mat-select formControlName="city" class="custom-select">
+            <mat-option value="Coimbatore">Coimbatore</mat-option>
+            <mat-option value="Chennai">Chennai</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Image Upload Section -->
+        <p>Images:</p>
+        <div class="image-upload-grid">
+          <div class="image-upload-cell" *ngFor="let image of uploadedImages; let i = index">
+            <ng-container *ngIf="image">
+              <img [src]="image" alt="Image {{i + 1}}" class="image-preview" (click)="triggerImageUpload(i)">
+            </ng-container>
+            <ng-container *ngIf="!image">
+              <label for="imageUpload{{i}}" class="image-upload-label">
+                <input type="file" id="imageUpload{{i}}" (change)="handleImageUpload($event, i)" class="image-upload-input" accept=".jpg, .jpeg, .png, image/jpg, image/jpeg, image/png">
+              </label>
+            </ng-container>
+            <input type="file" id="imageUpload{{i}}" (change)="handleImageUpload($event, i)" class="image-upload-input-hidden" accept=".jpg, .jpeg, .png, image/jpg, image/jpeg, image/png">
+          </div>
+        </div>
+        <button mat-button matStepperNext [disabled]="!locationDetails.valid" class="custom-button">Post Add</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
 </form>

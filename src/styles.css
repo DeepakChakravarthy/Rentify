@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-step-icon-state-edit,.mat-step-icon-selected {
+background-color: brown !important;
+}
+
+.mat-mdc-radio-button .mdc-radio .mdc-radio__native-control:enabled:checked+.mdc-radio__background .mdc-radio__outer-circle {
+    border-color: #cd0800 !important;
+}
+
+.mat-mdc-radio-button.mat-mdc-radio-checked .mdc-radio__background::before {
+    background-color: #dc3545 !important;
+}
+
+.mat-mdc-radio-button .mdc-radio .mdc-radio__native-control:enabled+.mdc-radio__background .mdc-radio__inner-circle {
+    border-color: #dc3545 !important;
+}
+
+.mat-mdc-radio-button .mdc-radio .mdc-radio__native-control:enabled:hover+.mdc-radio__background .mdc-radio__inner-circle {
+    border-color: #b12f3a !important; /* Darker shade of the initial color for hover effect */
+}

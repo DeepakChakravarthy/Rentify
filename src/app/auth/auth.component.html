@@ -1,21 +1,69 @@
 <div class="login-container">
-    <img src="icon.png" alt="Icon" class="icon">
-    <div *ngIf="currentStep === 1">
-      <h2>Sign In</h2>
+  <h1 class="icon">Rentify</h1>
+
+  <!-- Email/Phone Input -->
+  <div *ngIf="currentStep === 1">
+    <div class="left-container">
+      <h3>Sign In</h3>
       <p>to continue to Rentify</p>
-      <input type="text" [(ngModel)]="emailOrPhone" placeholder="Email or Phone" class="input-field">
-      <div class="buttons">
-        <button (click)="goToNext()">Next</button>
-        <button (click)="currentStep = 2">Create account</button>
-      </div>
     </div>
-    <div *ngIf="currentStep === 2">
-      <h2>Create a Rentify Account</h2>
-      <div class="name-fields">
-        <input type="text" [(ngModel)]="firstName" placeholder="First Name" class="input-field">
-        <input type="text" [(ngModel)]="lastName" placeholder="Last Name" class="input-field">
-      </div>
-      <button (click)="createAccount()">Next</button>
-    </div>
+      <input type="text" [(ngModel)]="emailOrPhone" placeholder="Email" class="input-field">
+      <button class="step-button" (click)="goToStep(2)">Next</button>
+      <button class="action-button" (click)="goToStep(3)">Create Account</button>
   </div>
-  
+
+  <!-- Password Input -->
+  <div *ngIf="currentStep === 2">
+    <div class="left-container">
+      <h3>Sign In</h3>
+      <p>to continue to Rentify</p>
+    </div>
+      <input type="password" [(ngModel)]="password" placeholder="Password" class="input-field">
+      <button class="step-back-button" (click)="goToStep(1)">Back</button>
+      <button class="step-button" (click)="login()">Login</button>
+  </div>
+
+  <!-- Account Creation -->
+  <div *ngIf="currentStep === 3">
+    <div class="left-container">
+      <h3>Create Account</h3>
+      <p>to continue to Rentify</p>
+    </div>
+      <input type="text" [(ngModel)]="firstName" placeholder="First Name" class="input-field">
+      <input type="text" [(ngModel)]="lastName" placeholder="Last Name" class="input-field">
+      <button class="step-button" (click)="goToStep(4)">Next</button>
+      <button class="action-button" (click)="goToStep(1)">Login</button>
+
+  </div>
+
+  <div *ngIf="currentStep === 4">
+    <div class="left-container">
+      <h3>Create Account</h3>
+      <p>to continue to Rentify</p>
+    </div>
+    <div class="input-wrapper">
+      <input type="password" [(ngModel)]="password" [type]="showPassword ? 'text' : 'password'" placeholder="Password" class="password-input-field">
+      <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
+        <i [class]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+      </button>
+    </div>
+    <div class="input-wrapper">
+      <input type="password" [(ngModel)]="confirmPassword" [type]="showPassword ? 'text' : 'password'" placeholder="Confirm Password" class="password-input-field">
+      <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
+        <i [class]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+      </button>
+    </div>
+    <button class="step-button" (click)="goToStep(5)">Next</button>
+    <button class="action-button" (click)="goToStep(1)">Login</button>
+  </div>
+  <!-- Mobile Number Entry -->
+  <div *ngIf="currentStep === 5">
+    <div class="left-container">
+      <h3>Create Account</h3>
+      <p>to continue to Rentify</p>
+    </div>
+      <input type="tel" [(ngModel)]="mobileNumber" placeholder="Mobile Number" class="input-field">
+      <button class="step-button" (click)="createAccount()">Go!</button>
+      <button class="action-button" (click)="goToStep(1)">Login</button>
+  </div>
+</div>

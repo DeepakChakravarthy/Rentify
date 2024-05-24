@@ -1,0 +1,166 @@
+.mat-step-icon-selected {
+    background-color: brown !important;
+}
+
+.mat-step-icon.mat-step-icon-state-edit {
+    background-color: brown !important;
+}
+
+.mat-stepper-horizontal {
+    padding: 10px 200px;
+}
+
+.custom-stepper {
+    margin: 100px;
+    width: auto;
+    padding: 10px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 15px 90px rgba(0, 1, 0, 0.1);
+}
+
+.custom-stepper .mat-horizontal-stepper-header {
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.custom-input,
+.basic-input,
+.financial-input {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+}
+
+.financial-input {
+    width: 30%;
+}
+
+.custom-button {
+    display: block;
+    margin: 20px auto;
+    width: 100px;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.custom-button:hover {
+    background-color: #0056b3;
+}
+
+.mat-mdc-button.mat-mdc-button-base {
+    position: relative;
+    background: brown;
+    color: white !important;
+    transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    display: inline-flex;
+}
+
+.mdc-button:hover {
+    cursor: pointer;
+    background: darkred; /* Change the background color on hover */
+    color: #fff; /* Ensure text color remains white on hover */
+}
+
+.mdc-button:active {
+    outline: none;
+    background: maroon; /* Change the background color on active */
+    color: #fff; /* Ensure text color remains white on active */
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3); /* Add an inset shadow to indicate active state */
+}
+
+.mdc-button:disabled,
+.mdc-button[disabled] {
+    background: lightgray; /* Change the background color when disabled */
+    color: gray; /* Change the text color when disabled */
+    cursor: not-allowed; /* Change cursor to indicate the button is disabled */
+    box-shadow: none; /* Remove any shadows when disabled */
+    pointer-events: none; /* Prevent any interactions when disabled */
+}
+
+.mdc-button:not(:disabled) {
+    transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease; /* Re-add transitions for non-disabled states */
+}
+
+
+
+@media (max-width: 768px) {
+    .mat-mdc-button.mat-mdc-button-base {
+        width: 100%; /* Full width on small screens */
+        padding: 12px; /* Increase padding for better touch target size */
+        font-size: 16px; /* Adjust font size for better readability */
+    }
+}
+
+.preferences-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 10px;
+}
+
+.grid-item {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.image-upload-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 10px 0;
+  }
+
+  .image-upload-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    position: relative;
+    width: 100%;
+    height: 150px;
+  }
+
+  .image-upload-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .upload-icon {
+    font-size: 2em;
+    color: #ccc;
+  }
+
+  .image-preview {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .image-upload-input {
+    display: none;
+  }
+  .image-upload-input-hidden {
+    display: none;
+  }

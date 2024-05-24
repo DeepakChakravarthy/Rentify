@@ -10,8 +10,17 @@ import { MyPropertiesComponent } from './my-properties/my-properties.component';
 import { AuthComponent } from './auth/auth.component';
 import { HeaderComponent } from './header/header.component';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatButtonModule } from '@angular/material/button';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +35,18 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     RouterModule,
     AppRoutingModule,
-    FormsModule // Add FormsModule here
+    FormsModule,
+    BrowserAnimationsModule, // Add FormsModule here
+    ReactiveFormsModule,
+    MatStepperModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatRadioModule,
+    MatButtonModule
 
   ],
   providers: [],
