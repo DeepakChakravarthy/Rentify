@@ -28,6 +28,7 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { InterestModalComponent } from './interest-modal/interest-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FullScreenImageModalComponent } from './full-screen-image-modal/full-screen-image-modal.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { FullScreenImageModalComponent } from './full-screen-image-modal/full-sc
     ToastrModule.forRoot(), // ToastrModule added
     MatCardModule,
     NgxGalleryModule,
-    MatDialogModule
+    MatDialogModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

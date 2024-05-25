@@ -1,24 +1,24 @@
 .navbar-custom {
     background-color: #3e0404;
-}
-.nav-link-custom {
+  }
+  .nav-link-custom {
     color: #ffffff;
     font-weight: bold;
-}
-.nav-link-custom:hover {
+  }
+  .nav-link-custom:hover {
     color: #ffc107;
-}
-.nav-link-post {
+  }
+  .nav-link-post {
     background-color: #dc353557;
     color: wheat;
     padding: 8px 16px;
     border-radius: 14px;
     font-weight: bold;
-}
-.nav-link-post:hover {
+  }
+  .nav-link-post:hover {
     color: white;
-}
-.product-name{
+  }
+  .product-name {
     color: white;
     cursor: pointer;
     top: 15px;
@@ -26,4 +26,5 @@
     display: flex;
     font-size: xx-large;
     left: 30px;
-}
+  }
+  

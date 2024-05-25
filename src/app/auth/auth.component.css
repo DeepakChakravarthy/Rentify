@@ -12,163 +12,136 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-
-  }
-  
-  .icon {
-    margin-bottom: 20px;
-    color: #971b43;
-    position: relative;
-    left: 430px;
-    top: 20px;
-    font-size: xx-large;
-  }
-  
-
-  .input-wrapper {
-    position: relative;
-    width: 350px;
-    margin-top: 10px;
-  }
-  
-  .input-field {
-    width: 135%; /* Adjust the width to fill the container */
-    padding: 10px;
-    padding-right: 40px; /* Additional padding to make space for the icon */
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    display: flex;
-    position: relative;
-    left: 340px; /* Adjust position as necessary */
-    bottom: 50px;
-    margin-top:10px;
-  }
-
-  .password-input-field{
-    width: 90%;
-    padding: 10px;
-    padding-right: 40px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    display: flex;
-    position: relative;
-    left: 340px;
-    bottom: 50px;
-    margin-top: 10px;
-  }
-  
-  .input-field:focus {
-    border-color: #971b43;
-    box-shadow: 0 0 8px rgba(151, 27, 67, 0.5);
-    outline: none;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .toggle-password {
-    position: absolute;
-    left: 620px;
-    bottom: 57px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #971b43;
-  }
-  
-  .toggle-password i {
-    font-size: 16px;
-  }
-  /* .input-field {
-    width: 350px;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    margin-top: 10px;
-    display: flex;
-    position: relative;
-    left: 300px;
-    bottom: 50px;
-
-  }
-  .input-field:focus {
-    border-color: #971b43;
-    box-shadow: 0 0 8px rgba(151, 27, 67, 0.5); 
-    outline: none; 
-    transition: border-color 0.3s ease, box-shadow 0.3s ease; 
-  } */
-  
-  .name-fields {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .name-fields .input-field {
-    width: calc(50% - 20px);
-  }
-  
-  .step-button {
-    padding: 5px 25px;
-    margin-top: 10px;
-    border: none;
-    background-color: #dc3545b3;
-    color: white;
-    cursor: pointer;
-    border-radius: 60px;
-    display: inline-flex;
-    left: 565px;
-    position: absolute;
-    bottom: 50px;
-  }
-  .step-button:hover {
-    background-color: #b02a37; 
-    color: white; 
-    border-radius: 60px;
-    padding: 5px 25px;
-    transition: background-color 0.9s ease, color 0.9s ease, border-radius 0.9s ease;
-  }
-  .step-back-button{
-    position: absolute;
-    background-color: #fbfbfb;
-    border: none;
-    color: #971b43;
-    bottom: 50px;
-    padding: 5px 25px;
-    border-radius: 60px;
-    transition: background-color 0.9s ease, color 0.9s ease, border-radius 0.9s ease;
-    display: inline-flex;
-    left: 20px;
-    margin-left: 11px;
-  }
-  .step-back-button:hover {
-    background-color: #b02a37; 
-    color: white; 
-    border-radius: 60px;
-    border-radius: 60px;
-    padding: 5px 25px;
-    transition: background-color 0.9s ease, color 0.9s ease, border-radius 0.9s ease;
-  }
-
-
-.action-button{
-    position: absolute;
-    background-color: #fbfbfb;
-    border: none;
-    color: #971b43;
-    left: 35px;
-    bottom: 50px;
-    padding: 5px 25px;
-    border-radius: 60px;
-    transition: background-color 0.9s ease, color 0.9s ease, border-radius 0.9s ease;
-    display: inline-flex;
 }
+
+.icon {
+  margin-bottom: 20px;
+  color: #971b43;
+  position: relative;
+  left: 430px;
+  top: 20px;
+  font-size: xx-large;
+}
+
+.input-wrapper {
+  position: relative;
+  width: 350px;
+  margin-top: 10px;
+}
+
+.input-field {
+  width: 135%; /* Adjust the width to fill the container */
+  padding: 10px;
+  padding-right: 40px; /* Additional padding to make space for the icon */
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  display: flex;
+  position: relative;
+  left: 340px; /* Adjust position as necessary */
+  bottom: 50px;
+  margin-top: 10px;
+}
+
+.password-input-field {
+  width: 90%;
+  padding: 10px;
+  padding-right: 40px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  display: flex;
+  position: relative;
+  left: 340px;
+  bottom: 50px;
+  margin-top: 10px;
+}
+
+.input-field:focus {
+  border-color: #971b43;
+  box-shadow: 0 0 8px rgba(151, 27, 67, 0.5);
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.toggle-password {
+  position: absolute;
+  left: 620px;
+  bottom: 57px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #971b43;
+}
+
+.toggle-password i {
+  font-size: 16px;
+}
+
+.step-button {
+  padding: 5px 25px;
+  margin-top: 10px;
+  border: none;
+  background-color: #dc3545b3;
+  color: white;
+  cursor: pointer;
+  border-radius: 60px;
+  display: inline-flex;
+  left: 565px;
+  position: absolute;
+  bottom: 50px;
+}
+
+.step-button:hover {
+  background-color: #b02a37;
+  color: white;
+  border-radius: 60px;
+  padding: 5px 25px;
+  transition: background-color 0.9s ease, color 0.9s ease, border-radius 0.9s ease;
+}
+
+.step-back-button {
+  position: absolute;
+  background-color: #fbfbfb;
+  border: none;
+  color: #971b43;
+  bottom: 50px;
+  padding: 5px 25px;
+  border-radius: 60px;
+  transition: background-color 0.9s ease, color 0.9s ease, border-radius 0.9s ease;
+  display: inline-flex;
+  left: 20px;
+  margin-left: 11px;
+}
+
+.step-back-button:hover {
+  background-color: #b02a37;
+  color: white;
+  border-radius: 60px;
+  border-radius: 60px;
+  padding: 5px 25px;
+  transition: background-color 0.9s ease, color 0.9s ease, border-radius 0.9s ease;
+}
+
+.action-button {
+  position: absolute;
+  background-color: #fbfbfb;
+  border: none;
+  color: #971b43;
+  left: 35px;
+  bottom: 50px;
+  padding: 5px 25px;
+  border-radius: 60px;
+  transition: background-color 0.9s ease, color 0.9s ease, border-radius 0.9s ease;
+  display: inline-flex;
+}
+
 .action-button:hover {
-  background-color: #dc3545b3; 
-  color: white;            
+  background-color: #dc3545b3;
+  color: white;
   cursor: pointer;
   border-radius: 60px;
   padding: 5px 25px;
 }
- 
+
 .left-container {
   left: 18px;
   position: relative;
@@ -183,5 +156,24 @@
   font-size: 16px;
   color: #666;
 }
- 
-  
+
+.input-field.invalid {
+  border-color: red;
+}
+
+.password-input-field.invalid {
+  border-color: red;
+}
+
+.email-input-field {
+  width: 90%;
+  padding: 10px;
+  padding-right: 40px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  display: flex;
+  position: relative;
+  left: 340px;
+  bottom: 50px;
+  margin-top: 10px;
+}

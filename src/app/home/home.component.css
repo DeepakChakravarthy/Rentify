@@ -3,40 +3,40 @@
     width: 100%;
     height: 200px;
     background-image: url('/assets/cover-photo.jpg');
-    background-size: contain;
+    background-size: cover;
     background-position: center;
     margin-top: -1px;
-  }
-  
-  .overlay {
+}
+
+.overlay {
     position: absolute;
     top: 0px;
     left: 0px;
-    width: -webkit-fill-available;
+    width: 100%;
     height: 200px;
     background: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
 }
-  
-  .container {
+
+.container {
     text-align: center;
     color: white;
-  }
-  
-  .search-bar {
+}
+
+.search-bar {
     margin-top: 20px;
-  }
-  
-  .search-bar input[type="text"] {
+}
+
+.search-bar input[type="text"] {
     padding: 10px;
     width: 300px;
     border: none;
     border-radius: 5px;
-  }
-  
-  .search-bar button {
+}
+
+.search-bar button {
     padding: 10px 20px;
     margin-left: 10px;
     border: none;
@@ -44,12 +44,11 @@
     background-color: #741515;
     color: white;
     cursor: pointer;
-  }
-  
-  .search-bar button:hover {
-    background-color: #3e0404;
-  }
+}
 
+.search-bar button:hover {
+    background-color: #3e0404;
+}
 
 .main-content {
     display: flex;
@@ -86,33 +85,48 @@
     border: 1px solid #ddd;
 }
 
-
 .demo-inline-calendar-card {
     width: 300px;
     background-color: #f8f8f8;
-  }
+}
+
 .property-list {
     flex: 3;
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 13px;
+    align-content: flex-start; /* Ensures items start from the top */
 }
 
 .card {
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 5px;
-    padding: 20px;
-    width: calc(33.333% - 20px);
+    padding: 10px; /* Reduced padding to avoid extra space */
+    width: 345px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
     text-align: center;
+    height: 300px;
+    margin: 0; /* Ensure no extra margin */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
 .card img.property-image {
     width: 100%;
-    height: auto;
+    height: 150px; /* Adjusted height for the image */
+    object-fit: cover;
     border-radius: 5px;
+}
+
+.card h2 {
+    font-size: 14px;
+    margin: 5px 0; /* Reduced margin */
+}
+
+.card .rental-amount, .card .description {
+    font-size: 12px;
+    color: #555;
 }
 
 .card:hover {
@@ -159,19 +173,61 @@
     font-size: 16px;
 }
 
+/* Specific adjustments for 1920x1080 */
+@media screen and (min-width: 1920px) {
+    .card {
+        width: 345px;
+    }
+}
+
+/* Specific adjustments for 1366x768 */
+@media screen and (min-width: 1366px) and (max-width: 1919px) {
+    .card {
+        width: 300px;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .card {
+        width: calc(25% - 10px);
+    }
+}
+
+@media (max-width: 992px) {
+    .card {
+        width: calc(33.333% - 10px);
+    }
+}
+
 @media (max-width: 768px) {
     .card {
-        width: calc(50% - 20px);
+        width: calc(50% - 10px);
+    }
+}
+
+@media (max-width: 576px) {
+    .card {
+        width: calc(50% - 10px);
+        height: 260px; /* Adjust height for smaller screens */
+    }
+
+    .card img.property-image {
+        height: 120px; /* Adjust image height for smaller screens */
     }
 }
 
 @media (max-width: 480px) {
     .card {
         width: 100%;
+        height: 260px; /* Adjust height for smallest screens */
     }
 
     .filters {
         display: none;
     }
-}
 
+    .card img.property-image {
+        height: 120px; /* Adjust image height for smallest screens */
+    }
+}

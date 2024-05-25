@@ -1,69 +1,94 @@
 <div class="login-container">
   <h1 class="icon">Rentify</h1>
 
-  <!-- Email/Phone Input -->
-  <div *ngIf="currentStep === 1">
-    <div class="left-container">
-      <h3>Sign In</h3>
-      <p>to continue to Rentify</p>
+  <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+    <!-- Step 1: Email/Phone Input -->
+    <div *ngIf="currentStep === 1">
+      <div class="left-container">
+        <h3>Sign In</h3>
+        <p>to continue to Rentify</p>
+      </div>
+      <input 
+        type="text" 
+        formControlName="emailOrPhone" 
+        placeholder="Email" 
+        class="input-field"
+        [class.invalid]="authForm.get('emailOrPhone')?.invalid && authForm.get('emailOrPhone')?.touched">
+      <button 
+        class="step-button" 
+        type="button"
+        (click)="goToStep(2)" 
+        [disabled]="!isEmailValid()">Next</button>
+      <button class="action-button" type="button" (click)="goToStep(3)">Create Account</button>
     </div>
-      <input type="text" [(ngModel)]="emailOrPhone" placeholder="Email" class="input-field">
-      <button class="step-button" (click)="goToStep(2)">Next</button>
-      <button class="action-button" (click)="goToStep(3)">Create Account</button>
-  </div>
 
-  <!-- Password Input -->
-  <div *ngIf="currentStep === 2">
-    <div class="left-container">
-      <h3>Sign In</h3>
-      <p>to continue to Rentify</p>
+    <!-- Step 2: Password Input -->
+    <div *ngIf="currentStep === 2">
+      <div class="left-container">
+        <h3>Sign In</h3>
+        <p>to continue to Rentify</p>
+      </div>
+      <input 
+        type="password" 
+        formControlName="password" 
+        placeholder="Password" 
+        class="input-field"
+        [class.invalid]="authForm.get('password')?.invalid && authForm.get('password')?.touched">
+      <button class="step-back-button" type="button" (click)="goToStep(1)">Back</button>
+      <button 
+        class="step-button" 
+        type="submit" 
+        [disabled]="!isPasswordValid()">Login</button>
     </div>
-      <input type="password" [(ngModel)]="password" placeholder="Password" class="input-field">
-      <button class="step-back-button" (click)="goToStep(1)">Back</button>
-      <button class="step-button" (click)="login()">Login</button>
-  </div>
 
-  <!-- Account Creation -->
-  <div *ngIf="currentStep === 3">
-    <div class="left-container">
-      <h3>Create Account</h3>
-      <p>to continue to Rentify</p>
+    <!-- Step 3: Account Creation -->
+    <div *ngIf="currentStep === 3">
+      <div class="left-container">
+        <h3>Create Account</h3>
+        <p>to continue to Rentify</p>
+      </div>
+      <input type="text" formControlName="firstName" placeholder="First Name" class="input-field">
+      <input type="text" formControlName="lastName" placeholder="Last Name" class="input-field">
+      <button class="step-button" type="button" (click)="goToStep(4)" [disabled]="!isNameFieldsValid()">Next</button>
+      <button class="action-button" type="button" (click)="goToStep(1)">Login</button>
     </div>
-      <input type="text" [(ngModel)]="firstName" placeholder="First Name" class="input-field">
-      <input type="text" [(ngModel)]="lastName" placeholder="Last Name" class="input-field">
-      <button class="step-button" (click)="goToStep(4)">Next</button>
-      <button class="action-button" (click)="goToStep(1)">Login</button>
 
-  </div>
+    <!-- Step 4: Email and Password Entry for Account Creation -->
+    <div *ngIf="currentStep === 4">
+      <div class="left-container">
+        <h3>Create Account</h3>
+        <p>to continue to Rentify</p>
+      </div>
+      <input 
+        type="text" 
+        formControlName="emailOrPhone" 
+        placeholder="Email" 
+        class="email-input-field"
+        [class.invalid]="authForm.get('emailOrPhone')?.invalid && authForm.get('emailOrPhone')?.touched">
+      <div class="input-wrapper">
+        <input 
+          type="password" 
+          formControlName="password" 
+          [type]="showPassword ? 'text' : 'password'" 
+          placeholder="Password" 
+          class="password-input-field">
+        <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
+          <i [class]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+        </button>
+      </div>
+      <button class="step-button" type="button" (click)="goToStep(5)" [disabled]="!isCreateAccountFormValid()">Next</button>
+      <button class="action-button" type="button" (click)="goToStep(3)">Back</button>
+    </div>
 
-  <div *ngIf="currentStep === 4">
-    <div class="left-container">
-      <h3>Create Account</h3>
-      <p>to continue to Rentify</p>
+    <!-- Step 5: Mobile Number Entry -->
+    <div *ngIf="currentStep === 5">
+      <div class="left-container">
+        <h3>Create Account</h3>
+        <p>to continue to Rentify</p>
+      </div>
+      <input type="tel" formControlName="mobileNumber" placeholder="Mobile Number" class="input-field">
+      <button class="step-button" type="submit" [disabled]="!isMobileNumberValid()">Go!</button>
+      <button class="action-button" type="button" (click)="goToStep(4)">Back</button>
     </div>
-    <div class="input-wrapper">
-      <input type="password" [(ngModel)]="password" [type]="showPassword ? 'text' : 'password'" placeholder="Password" class="password-input-field">
-      <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
-        <i [class]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
-      </button>
-    </div>
-    <div class="input-wrapper">
-      <input type="password" [(ngModel)]="confirmPassword" [type]="showPassword ? 'text' : 'password'" placeholder="Confirm Password" class="password-input-field">
-      <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
-        <i [class]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
-      </button>
-    </div>
-    <button class="step-button" (click)="goToStep(5)">Next</button>
-    <button class="action-button" (click)="goToStep(1)">Login</button>
-  </div>
-  <!-- Mobile Number Entry -->
-  <div *ngIf="currentStep === 5">
-    <div class="left-container">
-      <h3>Create Account</h3>
-      <p>to continue to Rentify</p>
-    </div>
-      <input type="tel" [(ngModel)]="mobileNumber" placeholder="Mobile Number" class="input-field">
-      <button class="step-button" (click)="createAccount()">Go!</button>
-      <button class="action-button" (click)="goToStep(1)">Login</button>
-  </div>
+  </form>
 </div>

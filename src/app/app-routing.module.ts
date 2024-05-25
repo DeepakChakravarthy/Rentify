@@ -5,13 +5,14 @@ import { PropertyDetailComponent } from './property-detail/property-detail.compo
 import { PostPropertyComponent } from './post-property/post-property.component';
 import { MyPropertiesComponent } from './my-properties/my-properties.component';
 import { AuthComponent } from './auth/auth.component';
+import { AuthGuard } from './authguard/authGuard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'property/:id', component: PropertyDetailComponent },
-  { path: 'post-property', component: PostPropertyComponent },
+  { path: 'post-property', component: PostPropertyComponent, canActivate: [AuthGuard] },
   { path: 'my-properties', component: MyPropertiesComponent },
-  { path: 'auth', component: AuthComponent }
+  { path: 'auth', component: AuthComponent,canActivate: [AuthGuard] }
 ];
 
 @NgModule({

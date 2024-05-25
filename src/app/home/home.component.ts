@@ -1,60 +1,94 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
+import { PropertyService } from '../services/property.service';
+import { Property } from '../models/property.model';
+import { LoaderService } from '../services/loader.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
-  properties = [
-    { id: 1, title: 'Beautiful House 1', description: 'Description for house 1', image: 'https://source.unsplash.com/random/300x200?house1' },
-    { id: 2, title: 'Beautiful House 2', description: 'Description for house 2', image: 'https://source.unsplash.com/random/300x200?house2' },
-    { id: 3, title: 'Beautiful House 3', description: 'Description for house 3', image: 'https://source.unsplash.com/random/300x200?house3' },
-    { id: 4, title: 'Beautiful House 4', description: 'Description for house 4', image: 'https://source.unsplash.com/random/300x200?house4' },
-    { id: 5, title: 'Beautiful House 5', description: 'Description for house 5', image: 'https://source.unsplash.com/random/300x200?house5' },
-    { id: 6, title: 'Beautiful House 6', description: 'Description for house 6', image: 'https://source.unsplash.com/random/300x200?house6' },
-    // Add more property objects here
-  ];
+export class HomeComponent implements OnInit, OnDestroy {
+  properties: Property[] = [];
   currentPage = 1;
-  itemsPerPage = 6;
-  totalPages = Math.ceil(this.properties.length / this.itemsPerPage);
+  itemsPerPage = 12;
+  totalPages = 1;
+  isLoading: boolean = true;
   filters = {
-    rentalPeriod: null,
-    tenantPreference: null,
-    availableDate: null,
-    renewalPeriod: null,
-    ebBill: null,
-    parking: null,
-    balcony: null,
-    agreement: null,
-    cctv: null,
-    waterTax: null,
-    petFriendly: null
+    title: null,
+    numBedrooms: null,
+    numBathrooms: null,
+    hospitalsNearby: null,
+    collegesNearby: null,
+    petFriendly: null,
+    balconyAvailable: null,
+    parkingAreaAvailable: null,
+    isCCTVAvailable: null
   };
 
-  months = Array.from({ length: 12 }, (_, i) => i + 1);
-  renewalYears = Array.from({ length: 5 }, (_, i) => i + 1);
+  bedrooms = Array.from({ length: 5 }, (_, i) => i + 1);
+  bathrooms = Array.from({ length: 5 }, (_, i) => i + 1);
 
-  constructor() { }
+  constructor(private propertyService: PropertyService, private el: ElementRef, private loader: LoaderService) { }
 
   ngOnInit(): void {
+    this.loader.show();
+    this.loadProperties(this.currentPage);
   }
 
-  get paginatedProperties() {
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    const endIndex = startIndex + this.itemsPerPage;
-    return this.properties.slice(startIndex, endIndex);
+  ngOnDestroy(): void {}
+
+  onFilterChange(): void {
+    this.currentPage = 1;  // Reset to first page on filter change
+    this.loader.show();
+    this.loadProperties(this.currentPage);
+  }
+
+  clearFilters(): void {
+    this.filters = {
+      title: null,
+      numBedrooms: null,
+      numBathrooms: null,
+      hospitalsNearby: null,
+      collegesNearby: null,
+      petFriendly: null,
+      balconyAvailable: null,
+      parkingAreaAvailable: null,
+      isCCTVAvailable: null
+    };
+    this.loader.show();
+    this.loadProperties(1);
+  }
+
+  loadProperties(page: number): void {
+    this.propertyService.getProperties(page, this.itemsPerPage, this.filters).subscribe((response: HttpResponse<any>) => {
+      this.properties = response.body.data;
+      this.isLoading = false;
+      this.loader.hide();
+      const paginationHeader = response.headers.get('x-pagination');
+      if (paginationHeader) {
+        const paginationData = JSON.parse(paginationHeader);
+        this.totalPages = paginationData.totalPages;
+      }
+    });
+  }
+
+  get paginatedProperties(): Property[] {
+    return this.properties;
   }
 
   nextPage() {
     if (this.currentPage < this.totalPages) {
       this.currentPage++;
+      this.loadProperties(this.currentPage);
     }
   }
 
   prevPage() {
     if (this.currentPage > 1) {
       this.currentPage--;
+      this.loadProperties(this.currentPage);
     }
   }
 }

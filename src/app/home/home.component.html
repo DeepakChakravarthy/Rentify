@@ -3,113 +3,94 @@
       <div class="container">
         <h1>Find Your Rental Home</h1>
         <div class="search-bar">
-          <input type="text" placeholder="Search for a house..." />
-          <button>Search</button>
+          <input type="text" placeholder="Search for a house..." [(ngModel)]="filters.title" (ngModelChange)="onFilterChange()" />
+          <button (click)="loadProperties(1)">Search</button>
         </div>
       </div>
     </div>
   </div>
-  <div class="main-content">
+  
+  <div *ngIf="isLoading" class="loader">
+    <app-loader></app-loader>
+  </div>
+  
+  <div *ngIf="!isLoading" class="main-content">
     <div class="filters">
-        <h3>Filters</h3>
-        <div class="filter-item">
-            <label for="rental-period">Tenant Rental Period (months):</label>
-            <select id="rental-period" [(ngModel)]="filters.rentalPeriod">
-                <option *ngFor="let month of months" [value]="month">{{ month }}</option>
-            </select>
-        </div>
-        <div class="filter-item">
-            <label for="tenant-preference">Tenant Preference:</label>
-            <mat-radio-group [(ngModel)]="filters.tenantPreference" class="custom-radio-group">
-                <mat-radio-button value=0 class="custom-radio-button">Yes</mat-radio-button>
-                <mat-radio-button value=1 class="custom-radio-button">No</mat-radio-button>
-              </mat-radio-group>
-        </div>
-        <div class="filter-item">
-            <label for="available-date">Date of Availability:</label>
-
-            <!-- <mat-card class="demo-inline-calendar-card">
-                <mat-calendar></mat-calendar>
-              </mat-card> -->
-            <mat-form-field>
-                <input matInput [matDatepicker]="picker" [(ngModel)]="filters.availableDate" readonly>
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-           
-        </div>
-        <div class="filter-item">
-            <label for="renewal-period">Agreement Renewal Period (years):</label>
-            <select id="renewal-period" [(ngModel)]="filters.renewalPeriod">
-                <option *ngFor="let year of renewalYears" [value]="year">{{ year }}</option>
-            </select>
-        </div>
-        <div class="filter-item">
-            <label for="eb-bill">EB Bill Debited from Rental Amount:</label>
-            <select id="eb-bill" [(ngModel)]="filters.ebBill">
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-            </select>
-        </div>
-        <div class="filter-item">
-            <label for="parking">Parking Area Available:</label>
-            <select id="parking" [(ngModel)]="filters.parking">
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-            </select>
-        </div>
-        <div class="filter-item">
-            <label for="balcony">Balcony Available:</label>
-            <select id="balcony" [(ngModel)]="filters.balcony">
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-            </select>
-        </div>
-        <div class="filter-item">
-            <label for="agreement">Rent Agreement Available:</label>
-            <select id="agreement" [(ngModel)]="filters.agreement">
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-            </select>
-        </div>
-        <div class="filter-item">
-            <label for="cctv">CCTV Available:</label>
-            <select id="cctv" [(ngModel)]="filters.cctv">
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-            </select>
-        </div>
-        <div class="filter-item">
-            <label for="water-tax">Water Tax Debited from Rental Amount:</label>
-            <select id="water-tax" [(ngModel)]="filters.waterTax">
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-            </select>
-        </div>
-        <div class="filter-item">
-            <label for="pet-friendly">Pet Friendly:</label>
-            <select id="pet-friendly" [(ngModel)]="filters.petFriendly">
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-            </select>
-        </div>
+      <h3>Filters</h3>
+      <div class="filter-item">
+        <label for="numBedrooms">Number of Bedrooms:</label>
+        <select id="numBedrooms" [(ngModel)]="filters.numBedrooms" (ngModelChange)="onFilterChange()">
+          <option *ngFor="let bedroom of bedrooms" [value]="bedroom">{{ bedroom }}</option>
+        </select>
+      </div>
+      <div class="filter-item">
+        <label for="numBathrooms">Number of Bathrooms:</label>
+        <select id="numBathrooms" [(ngModel)]="filters.numBathrooms" (ngModelChange)="onFilterChange()">
+          <option *ngFor="let bathroom of bathrooms" [value]="bathroom">{{ bathroom }}</option>
+        </select>
+      </div>
+      <div class="filter-item">
+        <label for="hospitalsNearby">Hospitals Nearby:</label>
+        <select id="hospitalsNearby" [(ngModel)]="filters.hospitalsNearby" (ngModelChange)="onFilterChange()">
+          <option [value]="true">Yes</option>
+          <option [value]="false">No</option>
+        </select>
+      </div>
+      <div class="filter-item">
+        <label for="collegesNearby">Colleges Nearby:</label>
+        <select id="collegesNearby" [(ngModel)]="filters.collegesNearby" (ngModelChange)="onFilterChange()">
+          <option [value]="true">Yes</option>
+          <option [value]="false">No</option>
+        </select>
+      </div>
+      <div class="filter-item">
+        <label for="petFriendly">Pet Friendly:</label>
+        <select id="petFriendly" [(ngModel)]="filters.petFriendly" (ngModelChange)="onFilterChange()">
+          <option [value]="true">Yes</option>
+          <option [value]="false">No</option>
+        </select>
+      </div>
+      <div class="filter-item">
+        <label for="balconyAvailable">Balcony Available:</label>
+        <select id="balconyAvailable" [(ngModel)]="filters.balconyAvailable" (ngModelChange)="onFilterChange()">
+          <option [value]="true">Yes</option>
+          <option [value]="false">No</option>
+        </select>
+      </div>
+      <div class="filter-item">
+        <label for="parkingAreaAvailable">Parking Area Available:</label>
+        <select id="parkingAreaAvailable" [(ngModel)]="filters.parkingAreaAvailable" (ngModelChange)="onFilterChange()">
+          <option [value]="true">Yes</option>
+          <option [value]="false">No</option>
+        </select>
+      </div>
+      <div class="filter-item">
+        <label for="isCCTVAvailable">CCTV Available:</label>
+        <select id="isCCTVAvailable" [(ngModel)]="filters.isCCTVAvailable" (ngModelChange)="onFilterChange()">
+          <option [value]="true">Yes</option>
+          <option [value]="false">No</option>
+        </select>
+      </div>
+      <button (click)="clearFilters()">Clear Filters</button>
     </div>
     <div class="property-list">
-        <div class="card" *ngFor="let property of paginatedProperties">
-            <a [routerLink]="['/property', property.id]">
-                <img [src]="property.image" alt="{{ property.title }}" class="property-image" />
-                <h2>{{ property.title }}</h2>
-                <p>{{ property.description }}</p>
-            </a>
-        </div>
-        <div class="pagination">
-            <button (click)="prevPage()">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <span>Page {{currentPage}} of {{totalPages}}</span>
-            <button (click)="nextPage()">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-        </div>
+      <div class="card" *ngFor="let property of paginatedProperties">
+        <a [routerLink]="['/property', property.id]">
+          <img [src]="property.imageUrl1" alt="{{ property.title }}" class="property-image" />
+          <h2>{{ property.title }}</h2>
+          <p class="rental-amount">{{ property.amount }}</p>
+          <p class="description">{{ property.description }}</p>
+        </a>
+      </div>
+      <div class="pagination">
+        <button (click)="prevPage()">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <span>Page {{currentPage}} of {{totalPages}}</span>
+        <button (click)="nextPage()">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
     </div>
-</div>
+  </div>
+  

@@ -1,10 +1,9 @@
 <h1 mat-dialog-title>House Owner Details</h1>
-<div mat-dialog-content>
-  <p><strong>First Name:</strong> {{data.property.title}}</p>
-  <p><strong>Lastname:</strong> {{data.property.description}}</p>
-  <p><strong>Mobile Number:</strong> {{data.property.rentalAmount}}</p>
-  <p><strong>EmailId:</strong> {{data.property.tenantPreference}}</p>
-  <!-- Add more property details as needed -->
+<div mat-dialog-content *ngIf="sellerDetails">
+  <p><strong>First Name:</strong> {{ sellerDetails.firstname }}</p>
+  <p><strong>Last Name:</strong> {{ sellerDetails.lastname }}</p>
+  <p><strong>Mobile Number:</strong> {{ sellerDetails.phoneNumber }}</p>
+  <p><strong>Email Id:</strong> {{ sellerDetails.email }}</p>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Close</button>

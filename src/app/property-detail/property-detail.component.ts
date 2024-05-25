@@ -1,7 +1,11 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { PropertyService } from '../services/property.service';
 import { InterestModalComponent } from '../interest-modal/interest-modal.component';
 import { FullScreenImageModalComponent } from '../full-screen-image-modal/full-screen-image-modal.component';
+import { LoaderService } from '../services/loader.service';
+import { UserAuthService } from '../services/user-auth.service';
 
 @Component({
   selector: 'app-property-detail',
@@ -9,35 +13,38 @@ import { FullScreenImageModalComponent } from '../full-screen-image-modal/full-s
   styleUrls: ['./property-detail.component.css']
 })
 export class PropertyDetailComponent implements OnInit {
-  property = {
-    title: 'Spacious 2 BHK Apartment',
-    imageUrls: [
-      'https://4.img-dpreview.com/files/p/TS600x600~sample_galleries/3002635523/4971879462.jpg',
-      'https://4.img-dpreview.com/files/p/TS600x600~sample_galleries/3002635523/4971879462.jpg',
-      'https://4.img-dpreview.com/files/p/TS600x600~sample_galleries/3002635523/4971879462.jpg',
-      'https://4.img-dpreview.com/files/p/TS600x600~sample_galleries/3002635523/4971879462.jpg'
-    ],
-    description: 'A spacious 2 BHK apartment with modern amenities and a great view.',
-    rentalAmount: 15000,
-    advanceRentalAmount: 45000,
-    tenantPreference: 'Family',
-    availabilityDate: new Date('2023-06-01'),
-    renewalPeriod: 5,
-    ebBillDebited: 'Yes',
-    parkingArea: 'Yes',
-    balcony: 'Yes',
-    rentAgreement: 'Yes',
-    cctv: 'Yes',
-    waterTaxDebited: 'Yes',
-    petFriendly: 'No',
-    likes: 120,
-    views: 3500
-  };
+  property: any = {};
+  imageUrls: string[] = [];
+  isLoading: boolean = true;
 
-  constructor(public dialog: MatDialog, private cdr: ChangeDetectorRef) {}
+  constructor(
+    private route: ActivatedRoute,
+    private propertyService: PropertyService,
+    public dialog: MatDialog,
+    private cdr: ChangeDetectorRef,
+    private loader: LoaderService,
+    private authService: UserAuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.cdr.markForCheck();
+    const propertyId = this.route.snapshot.paramMap.get('id');
+    if (propertyId) {
+      this.loader.show();
+      this.propertyService.getPropertyById(propertyId).subscribe(data => {
+        this.property = data;
+        this.imageUrls = [
+          this.property.data.imageUrl1,
+          this.property.data.imageUrl2,
+          this.property.data.imageUrl3,
+          this.property.data.imageUrl4
+        ].filter(url => url); // Filter out any empty URLs
+
+        this.cdr.markForCheck();
+        this.isLoading = false;
+        this.loader.hide();
+      });
+    }
   }
 
   likeProperty(): void {
@@ -45,9 +52,15 @@ export class PropertyDetailComponent implements OnInit {
   }
 
   openInterestModal(): void {
+    if (!this.authService.isUserLoggedIn()) {
+      this.router.navigate(['/auth']);
+      return;
+    }
+
+    const sellerId = this.property.data.sellerId;
     const dialogRef = this.dialog.open(InterestModalComponent, {
       width: '250px',
-      data: { firstName: '', lastName: '', phone: '', email: '' }
+      data: { sellerId }
     });
 
     dialogRef.afterClosed().subscribe(result => {
