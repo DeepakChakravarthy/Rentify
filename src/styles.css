@@ -22,3 +22,9 @@ background-color: brown !important;
 .mat-mdc-radio-button .mdc-radio .mdc-radio__native-control:enabled:hover+.mdc-radio__background .mdc-radio__inner-circle {
     border-color: #b12f3a !important; /* Darker shade of the initial color for hover effect */
 }
+.toast-success {
+    background-color: #3e0404 !important;
+}
+.mat-calendar-body-selected {
+    background-color: #dc3545 !important;
+}

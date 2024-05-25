@@ -41,13 +41,13 @@
     margin-left: 10px;
     border: none;
     border-radius: 5px;
-    background-color: #ff5a5f;
+    background-color: #741515;
     color: white;
     cursor: pointer;
   }
   
   .search-bar button:hover {
-    background-color: #ff3333;
+    background-color: #3e0404;
   }
 
 
@@ -60,12 +60,37 @@
 
 .filters {
     flex: 1;
-    max-width: 200px;
+    max-width: 400px;
     padding: 20px;
-    background-color: #f8f8f8;
+    background-color: #74151505;
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
+.filter-item {
+    margin-bottom: 10px;
+}
+
+.filter-item label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.filter-item select, .filter-item input {
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+
+.demo-inline-calendar-card {
+    width: 300px;
+    background-color: #f8f8f8;
+  }
 .property-list {
     flex: 3;
     display: flex;
@@ -106,14 +131,32 @@
     padding: 10px 20px;
     margin: 0 10px;
     border: none;
-    border-radius: 5px;
-    background-color: #ff5a5f;
+    border-radius: 200px;
+    background-color: #741515;
     color: white;
     cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 .pagination button:hover {
-    background-color: #ff3333;
+    background-color: #3e0404;
+    transform: scale(1.1);
+}
+
+.pagination button:disabled {
+    background-color: #d3d3d3;
+    color: #a1a1a1;
+    cursor: not-allowed;
+}
+
+.pagination span {
+    font-size: 16px;
+    color: #741515;
+    margin: 0 10px;
+}
+
+.pagination i {
+    font-size: 16px;
 }
 
 @media (max-width: 768px) {
@@ -131,3 +174,4 @@
         display: none;
     }
 }
+

@@ -21,6 +21,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
+import { LoaderComponent } from './loader/loader.component';
+import { ToastrModule } from 'ngx-toastr';
+import {MatCardModule} from '@angular/material/card';
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { InterestModalComponent } from './interest-modal/interest-modal.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FullScreenImageModalComponent } from './full-screen-image-modal/full-screen-image-modal.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +37,10 @@ import { MatButtonModule } from '@angular/material/button';
     PostPropertyComponent,
     MyPropertiesComponent,
     AuthComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoaderComponent,
+    InterestModalComponent,
+    FullScreenImageModalComponent
   ],
   imports: [
     BrowserModule,
@@ -46,8 +57,11 @@ import { MatButtonModule } from '@angular/material/button';
     MatDatepickerModule,
     MatNativeDateModule,
     MatRadioModule,
-    MatButtonModule
-
+    MatButtonModule,
+    ToastrModule.forRoot(), // ToastrModule added
+    MatCardModule,
+    NgxGalleryModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

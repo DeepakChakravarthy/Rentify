@@ -1,0 +1,47 @@
+.property-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .thumbnail {
+    width: calc(25% - 10px);
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  
+  .thumbnail img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+  
+  .thumbnail:hover {
+    transform: scale(1.05);
+  }
+  
+  .property-details p {
+    margin: 5px 0;
+  }
+  
+  .property-stats {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .property-stats button {
+    margin-left: 10px;
+  }
+  

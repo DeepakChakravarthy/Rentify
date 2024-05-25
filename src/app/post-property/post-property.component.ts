@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LoaderService } from '../loader/service/loader.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-property',
@@ -14,7 +17,7 @@ export class PostPropertyComponent {
   uploadedImages: (string | null)[] = [null, null, null, null]; // Placeholder for uploaded images
   imageFiles: (File | null)[] = [null, null, null, null];
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private loaderService: LoaderService,@Inject(ToastrService) private toastr: ToastrService,private router: Router) {
     const currentYear = new Date().getFullYear();
     this.maxDate = new Date(currentYear + 1, 11, 31);
     this.propertyForm = this.formBuilder.group({
@@ -71,6 +74,7 @@ export class PostPropertyComponent {
 
   onSubmit() {
     if (this.propertyForm.valid) {
+      this.loaderService.show(); // Show loader
       const formData = new FormData();
 
       // Append form data
@@ -105,8 +109,16 @@ export class PostPropertyComponent {
         }
       });
 
-      // Send the form data to the server
-      console.log('Form submitted successfully', formData);
+      // Simulate an HTTP request
+      setTimeout(() => {
+        this.loaderService.hide(); // Hide loader after submission
+        this.toastr.success('Your rental house has been posted successfully!', 'Listing Now Live!');
+        console.log('Form submitted successfully', formData);
+        this.router.navigate(['/']);
+
+
+
+      }, 2000);
     } else {
       console.log('Form is incomplete or invalid.');
     }

@@ -1,11 +1,29 @@
-<div *ngIf="property">
-    <h1>{{ property.title }}</h1>
-    <img [src]="property.imageUrl" alt="Property Image">
-    <p>{{ property.description }}</p>
-    <div>
-      <span>Likes: {{ property.likes }}</span>
-      <span>Views: {{ property.views }}</span>
+<div *ngIf="property" class="property-container">
+  <h1>{{ property.title }}</h1>
+  <div class="gallery">
+    <div class="thumbnail" *ngFor="let url of property.imageUrls" (click)="openFullScreenImage(url)">
+      <img [src]="url" alt="Property Image">
     </div>
-    <button (click)="onInterested()">I am Interested</button>
   </div>
-  
+  <p>{{ property.description }}</p>
+  <div class="property-details">
+    <p><strong>Rental Amount:</strong> {{ property.rentalAmount | currency }}</p>
+    <p><strong>Advance Rental Amount:</strong> {{ property.advanceRentalAmount | currency }}</p>
+    <p><strong>Tenant Preference:</strong> {{ property.tenantPreference }}</p>
+    <p><strong>Date of Availability:</strong> {{ property.availabilityDate | date:'dd/MM/yyyy' }}</p>
+    <p><strong>Agreement Renewal Period:</strong> {{ property.renewalPeriod }} years</p>
+    <p><strong>EB Bill Debited from Rental Amount:</strong> {{ property.ebBillDebited }}</p>
+    <p><strong>Parking Area Available:</strong> {{ property.parkingArea }}</p>
+    <p><strong>Balcony Available:</strong> {{ property.balcony }}</p>
+    <p><strong>Rent Agreement Available:</strong> {{ property.rentAgreement }}</p>
+    <p><strong>CCTV Available:</strong> {{ property.cctv }}</p>
+    <p><strong>Water Tax Debited from Rental Amount:</strong> {{ property.waterTaxDebited }}</p>
+    <p><strong>Pet Friendly:</strong> {{ property.petFriendly }}</p>
+  </div>
+  <div class="property-stats">
+    <span>Likes: {{ property.likes }}</span>
+    <button (click)="likeProperty()">Like</button>
+    <span>Views: {{ property.views }}</span>
+  </div>
+  <button mat-raised-button color="primary" (click)="openInterestModal()">I am Interested</button>
+</div>

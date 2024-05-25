@@ -18,6 +18,22 @@ export class HomeComponent {
   currentPage = 1;
   itemsPerPage = 6;
   totalPages = Math.ceil(this.properties.length / this.itemsPerPage);
+  filters = {
+    rentalPeriod: null,
+    tenantPreference: null,
+    availableDate: null,
+    renewalPeriod: null,
+    ebBill: null,
+    parking: null,
+    balcony: null,
+    agreement: null,
+    cctv: null,
+    waterTax: null,
+    petFriendly: null
+  };
+
+  months = Array.from({ length: 12 }, (_, i) => i + 1);
+  renewalYears = Array.from({ length: 5 }, (_, i) => i + 1);
 
   constructor() { }
 

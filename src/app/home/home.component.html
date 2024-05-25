@@ -12,18 +12,87 @@
   <div class="main-content">
     <div class="filters">
         <h3>Filters</h3>
-        <label>
-            <input type="checkbox" name="filter" value="price-range" /> Price Range
-        </label>
-        <label>
-            <input type="checkbox" name="filter" value="bedrooms" /> Bedrooms
-        </label>
-        <label>
-            <input type="checkbox" name="filter" value="location" /> Location
-        </label>
-        <label>
-            <input type="checkbox" name="filter" value="amenities" /> Amenities
-        </label>
+        <div class="filter-item">
+            <label for="rental-period">Tenant Rental Period (months):</label>
+            <select id="rental-period" [(ngModel)]="filters.rentalPeriod">
+                <option *ngFor="let month of months" [value]="month">{{ month }}</option>
+            </select>
+        </div>
+        <div class="filter-item">
+            <label for="tenant-preference">Tenant Preference:</label>
+            <mat-radio-group [(ngModel)]="filters.tenantPreference" class="custom-radio-group">
+                <mat-radio-button value=0 class="custom-radio-button">Yes</mat-radio-button>
+                <mat-radio-button value=1 class="custom-radio-button">No</mat-radio-button>
+              </mat-radio-group>
+        </div>
+        <div class="filter-item">
+            <label for="available-date">Date of Availability:</label>
+
+            <!-- <mat-card class="demo-inline-calendar-card">
+                <mat-calendar></mat-calendar>
+              </mat-card> -->
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="filters.availableDate" readonly>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+           
+        </div>
+        <div class="filter-item">
+            <label for="renewal-period">Agreement Renewal Period (years):</label>
+            <select id="renewal-period" [(ngModel)]="filters.renewalPeriod">
+                <option *ngFor="let year of renewalYears" [value]="year">{{ year }}</option>
+            </select>
+        </div>
+        <div class="filter-item">
+            <label for="eb-bill">EB Bill Debited from Rental Amount:</label>
+            <select id="eb-bill" [(ngModel)]="filters.ebBill">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+        </div>
+        <div class="filter-item">
+            <label for="parking">Parking Area Available:</label>
+            <select id="parking" [(ngModel)]="filters.parking">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+        </div>
+        <div class="filter-item">
+            <label for="balcony">Balcony Available:</label>
+            <select id="balcony" [(ngModel)]="filters.balcony">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+        </div>
+        <div class="filter-item">
+            <label for="agreement">Rent Agreement Available:</label>
+            <select id="agreement" [(ngModel)]="filters.agreement">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+        </div>
+        <div class="filter-item">
+            <label for="cctv">CCTV Available:</label>
+            <select id="cctv" [(ngModel)]="filters.cctv">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+        </div>
+        <div class="filter-item">
+            <label for="water-tax">Water Tax Debited from Rental Amount:</label>
+            <select id="water-tax" [(ngModel)]="filters.waterTax">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+        </div>
+        <div class="filter-item">
+            <label for="pet-friendly">Pet Friendly:</label>
+            <select id="pet-friendly" [(ngModel)]="filters.petFriendly">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
+        </div>
     </div>
     <div class="property-list">
         <div class="card" *ngFor="let property of paginatedProperties">
@@ -34,9 +103,13 @@
             </a>
         </div>
         <div class="pagination">
-            <button (click)="prevPage()">Previous</button>
+            <button (click)="prevPage()">
+                <i class="fas fa-chevron-left"></i>
+            </button>
             <span>Page {{currentPage}} of {{totalPages}}</span>
-            <button (click)="nextPage()">Next</button>
+            <button (click)="nextPage()">
+                <i class="fas fa-chevron-right"></i>
+            </button>
         </div>
     </div>
 </div>
